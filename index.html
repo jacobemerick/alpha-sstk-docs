@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Shutterstock API Reference</title>
+    <title>Shutterstock API Reference v1.0.19</title>
 
     <style>
     </style>
@@ -3953,6 +3953,11 @@ var n=this.pipeline.run(e.tokenizer(t)),r=new e.Vector,i=[],o=this._fields.reduc
                   </li>
                 
                   <li>
+                    <a href="#schema-computervisionimagecreateresponse" class="toc-h2 toc-link" data-title="ComputerVisionImageCreateResponse" data-track="click.apiRef.schema-computervisionimagecreateresponse">ComputerVisionImageCreateResponse</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#schema-contributor" class="toc-h2 toc-link" data-title="Contributor" data-track="click.apiRef.schema-contributor">Contributor</a>
                     
                   </li>
@@ -4510,7 +4515,7 @@ var n=this.pipeline.run(e.tokenizer(t)),r=new e.Vector,i=[],o=this._fields.reduc
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content"><h1 id="alpha-section" style="font-size: 48px; line-height: 53px;color: red; padding-top: 15px">Alpha Docs</h1>
-<h2 style="color: red; font-size: 30px; line-height: 33px; margin-top: -30px;">(April 8th 2020)</h2>
+<h2 style="color: red; font-size: 30px; line-height: 33px; margin-top: -30px;">(April 22nd 2020)</h2>
 <h3 style="color: red; margin-top: 0px;">New Features</h3>
 <ul><li style="color: red;"><a href="#editorial-list-updated-content" data-track="click.apiRef.editorial-list-updated-content"><code>GET /v2/editorial/updated</code></a> endpoint</li>
 </ul>
@@ -17512,8 +17517,8 @@ relevant, newest, oldest
 -H <span class="hljs-string">"Authorization: Bearer <span class="hljs-variable">$SHUTTERSTOCK_API_TOKEN</span>"</span> \
 --data-urlencode <span class="hljs-string">"type=edit"</span> \
 --data-urlencode <span class="hljs-string">"country=USA"</span> \
---data-urlencode <span class="hljs-string">"date_updated_start=2020-02-02T13:00:00-05:00"</span> \
---data-urlencode <span class="hljs-string">"date_updated_end=2020-02-02T15:00:00-05:00"</span>
+--data-urlencode <span class="hljs-string">"date_updated_start=2020-02-02T13:00:00Z"</span> \
+--data-urlencode <span class="hljs-string">"date_updated_end=2020-02-02T15:00:00Z"</span>
 </code></pre>
 <pre class="highlight tab tab-javascript--nodejs"><code><span class="hljs-keyword">const</span> sstk = <span class="hljs-built_in">require</span>(<span class="hljs-string">"shutterstock-api"</span>);
 
@@ -17522,8 +17527,8 @@ sstk.setAccessToken(process.env.SHUTTERSTOCK_API_TOKEN);
 <span class="hljs-keyword">const</span> editorialApi = <span class="hljs-keyword">new</span> sstk.EditorialApi();
 
 <span class="hljs-keyword">const</span> type = <span class="hljs-string">"edit"</span>;
-<span class="hljs-keyword">const</span> dateUpdatedStart = <span class="hljs-string">"2020-02-02T13:00:00-05:00"</span>;
-<span class="hljs-keyword">const</span> dateUpdatedEnd = <span class="hljs-string">"2020-02-02T15:00:00-05:00"</span>;
+<span class="hljs-keyword">const</span> dateUpdatedStart = <span class="hljs-string">"2020-02-02T13:00:00Z"</span>;
+<span class="hljs-keyword">const</span> dateUpdatedEnd = <span class="hljs-string">"2020-02-02T15:00:00Z"</span>;
 <span class="hljs-keyword">const</span> country = <span class="hljs-string">"USA"</span>;
 
 editorialApi.getUpdatedImages(type, dateUpdatedStart, dateUpdatedEnd, country)
@@ -17537,8 +17542,8 @@ editorialApi.getUpdatedImages(type, dateUpdatedStart, dateUpdatedEnd, country)
 <pre class="highlight tab tab-php"><code>$queryFields = [
   <span class="hljs-string">"type"</span> =&gt; <span class="hljs-string">"edit"</span>,
   <span class="hljs-string">"country"</span> =&gt; <span class="hljs-string">"USA"</span>,
-  <span class="hljs-string">"date_updated_start"</span> =&gt; <span class="hljs-string">"2020-02-02T13:00:00-05:00"</span>,
-  <span class="hljs-string">"date_updated_end"</span> =&gt; <span class="hljs-string">"2020-02-02T15:00:00-05:00"</span>,
+  <span class="hljs-string">"date_updated_start"</span> =&gt; <span class="hljs-string">"2020-02-02T13:00:00Z"</span>,
+  <span class="hljs-string">"date_updated_end"</span> =&gt; <span class="hljs-string">"2020-02-02T15:00:00Z"</span>,
 ];
 
 $options = [
@@ -17591,7 +17596,7 @@ edit, addition
 <span class="requiredParam">(Required)</span>
 </td>
 <td>string(date-time)</td>
-<td><p>Show images added, edited, or deleted on or after the specified date, in the format YYYY-MM-DD HH:MM</p>
+<td><p>Show images images added, edited, or deleted after the specified date, in RFC 3339 section 5.6 format, such as 2020-04-10T10:00:00Z</p>
 </td>
 </tr>
 <tr>
@@ -17600,20 +17605,20 @@ edit, addition
 <span class="requiredParam">(Required)</span>
 </td>
 <td>string(date-time)</td>
-<td><p>Show images images added, edited, or deleted before the specified date, in the format YYYY-MM-DD HH:MM</p>
+<td><p>Show images images added, edited, or deleted before the specified date, in RFC 3339 section 5.6 format, such as 2020-04-10T10:00:00Z</p>
 </td>
 </tr>
 <tr>
 <td>date_taken_start
 </td>
-<td>string(date-time)</td>
+<td>string</td>
 <td><p>Show images that were taken on or after the specified date, in the format YYYY-MM-DD; use this parameter if you want recently created images from the collection instead of updated older assets</p>
 </td>
 </tr>
 <tr>
 <td>date_taken_end
 </td>
-<td>string(date-time)</td>
+<td>string</td>
 <td><p>Show images that were taken before the specified date, in the format YYYY-MM-DD</p>
 </td>
 </tr>
@@ -18793,7 +18798,7 @@ The image data as a base64 string</p>
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2" data-track="click.apiRef.section-6.3.2">Created</a></td>
 <td>Created</td>
-<td>Inline</td>
+<td><a href="#schema-computervisionimagecreateresponse" data-track="click.apiRef.schema-computervisionimagecreateresponse">ComputerVisionImageCreateResponse</a></td>
 </tr>
 <tr>
 <td>400</td>
@@ -18824,29 +18829,6 @@ The image data as a base64 string</p>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.13" data-track="click.apiRef.section-6.5.13">Unsupported Media Type</a></td>
 <td>Unsupported Media Type</td>
 <td>None</td>
-</tr>
-</tbody>
-</table>
-<h4 id="upload-images-responseschema">Response Schema</h4>
-<p>Status Code <strong>201</strong></p>
-<p><em>Computer vision image upload information</em></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>» upload_id</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
 </tr>
 </tbody>
 </table>
@@ -21160,7 +21142,7 @@ code
 <blockquote>
 <p>Redirect user to authenticate with Shutterstock</p>
 </blockquote>
-<pre class="highlight tab tab-json"><code><span class="hljs-string">"https://accounts.shutterstock.com/login?next=%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26state%3D1539619928633%26scope%3Dlicenses.create%20licenses.view%20purchases.view%26client_id%3D6d097450b209c6dcd859%26redirect_uri%3Dhttp%3A%2F%2Flocalhost%3A3000%2Fmyapp%2Fauth%2Fcallback%26realm%3Dcustomer"</span>
+<pre class="highlight"><code>"https://accounts.shutterstock.com/login?next=%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26state%3D1539619928633%26scope%3Dlicenses.create%20licenses.view%20purchases.view%26client_id%3D6d097450b209c6dcd859%26redirect_uri%3Dhttp%3A%2F%2Flocalhost%3A3000%2Fmyapp%2Fauth%2Fcallback%26realm%3Dcustomer"
 </code></pre>
 <h4 id="authorize-applications-responses">Responses</h4>
 <table>
@@ -23623,6 +23605,43 @@ integer
 string
 </td>
 <td><p>The new name of the collection</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="schema-computervisionimagecreateresponse">ComputerVisionImageCreateResponse</h2>
+<p><a id="schemacomputervisionimagecreateresponse"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Computer vision image upload information"</span>,
+  <span class="hljs-attr">"properties"</span>: {
+    <span class="hljs-attr">"upload_id"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>
+    }
+  },
+  <span class="hljs-attr">"required"</span>: [
+    <span class="hljs-string">"upload_id"</span>
+  ],
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"object"</span>
+}
+</code></pre>
+<p><em>Computer vision image upload information</em></p>
+<h4 id="properties">Properties</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>upload_id<br>
+<span class="requiredParam">(Required)</span></td>
+<td>
+string
+</td>
+<td><p>none</p>
 </td>
 </tr>
 </tbody>
